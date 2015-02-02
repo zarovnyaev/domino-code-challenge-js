@@ -6,7 +6,6 @@ var DominosConfigBlock = function(params)
     this.obj = $('#dominos-config-block');
     this.containerObj = $('#dominos-config-block-container', this.obj);
     this.addNewDominoObj = $('#addNewDomino', this.obj);
-    this.dominoCount = 0;
 };
 
 /**

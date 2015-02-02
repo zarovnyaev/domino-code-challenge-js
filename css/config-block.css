@@ -10,8 +10,8 @@
 
 #dominos-config-block #addNewDomino {
     display: block;
-    background: #e5acac;
-    color: #000;
+    background: #f00;
+    color: #fff;
     text-align: center;
     height: 40px;
     line-height: 40px;
