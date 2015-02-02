@@ -26,19 +26,6 @@ var Domino = function(params)
     
     // Domino size
     this.sizeParams = params.size || {};
-    /*if (params.size === undefined || params.size.type === undefined 
-        || (params.size.type !== 'static' && params.size.type !== 'bodyRatio')
-        || isNaN(parseInt(params.size.width)) || isNaN(parseInt(params.size.height))
-        || (params.size.type === 'bodyRatio' && isNaN(parseInt(params.size.ratioBodyWidth)))
-    ) {
-        params.size.type = 'static';
-        params.size.width = 50;
-        params.size.height = 100;
-    }
-    this.dominoSizeCalcType = params.size.type;
-    this.dominoSizeWidth = params.size.width;
-    this.dominoSizeHeight = params.size.height;
-    this.dominoSizeRatioBodyWidth = params.size.ratioBodyWidth || 500;*/
     
     // jQuery object of elements
     this.dominoObj = null;
@@ -367,9 +354,4 @@ Domino.prototype.unraiseAll = function()
     $('div[rel-type=domino]')
             .css('z-index', 100)
             .css('box-shadow', 'none');
-};
-
-var l = function(d)
-{
-    console.log(d);
 };
