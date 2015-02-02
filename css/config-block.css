@@ -1,0 +1,41 @@
+
+#dominos-config-block {
+    float: right;
+    width: 300px;
+}
+
+#dominos-config-block #dominos-config-block-container {
+    overflow-y: auto;
+}
+
+#dominos-config-block #addNewDomino {
+    display: block;
+    background: #dbdbdb;
+    color: #000;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+.domino-config-block {
+    background-color: #eaeaea;
+}
+
+.domino-config-block .top-line {
+    background-color: #a7a7a7; 
+    padding: 5px;
+    color: #fff;
+}
+
+.domino-config-block .params-group-top {
+    font-weight: bold;
+    padding: 5px;
+}
+
+.domino-config-block .param-line {
+    padding: 5px;
+}
+
+.domino-config-block .param-line input[type=text] {
+    width: 100px;
+}
