@@ -7,6 +7,8 @@
         <link href="./css/domino.css" media="screen" rel="stylesheet" type="text/css">
         <link href="./css/config-block.css" media="screen" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="./js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="./js/document-mouse.js"></script>
+        <script type="text/javascript" src="./js/dragged-object.js"></script>
         <script type="text/javascript" src="./js/domino.js"></script>
         <script type="text/javascript" src="./js/domino-config-block.js"></script>
         <script type="text/javascript" src="./js/dominos-config-block.js"></script>
@@ -23,55 +25,57 @@
             <div class='top-line'>
                 Domino [<a href="#" data-rel='delete-btn'>delete</a>]
             </div>
-            <div class='param-line'>
-                Position left: <input type='text' name='position-left'>px.
-            </div>
-            <div class='param-line'>
-                Position top: <input type='text' name='position-top'>px.
-            </div>
-            <div class='param-line'>
-                Rotate: <input type='text' name='rotate'>deg.
-            </div>
-            <div class='param-line'>
-                Faces: 
-                <select name='face-1'>
-                    <option value='0'>0</option>
-                    <option value='1'>1</option>
-                    <option value='2'>2</option>
-                    <option value='3'>3</option>
-                    <option value='4'>4</option>
-                    <option value='5'>5</option>
-                    <option value='6'>6</option>
-                <select>
-                <select name='face-2'>
-                    <option value='0'>0</option>
-                    <option value='1'>1</option>
-                    <option value='2'>2</option>
-                    <option value='3'>3</option>
-                    <option value='4'>4</option>
-                    <option value='5'>5</option>
-                    <option value='6'>6</option>
-                <select>
-                [<a href='#' data-rel='face-rand-btn'>random</a>]
-            </div>
-            <div class='param-line'>
-                Size type: 
-                <select name='size-type'>
-                    <option value='static'>Static size</option>
-                    <option value='bodyRatio'>Ratio by window width</option>
-                <select>
-            </div>
-            <div class='param-line'>
-                Width: <input type='text' name='size-width'>px.
-            </div>
-            <div class='param-line'>
-                Height <input type='text' name='size-height'>px.
-            </div>
-            <div class='param-line' data-rel='size-ratio-body-width-line'>
-                This domino size for screen width: <input type='text' name='size-ratio-body-width'>px.
-            </div>
-            <div class='param-line'>
-                <input type='button' value='Update domino' data-rel='update-btn'>
+            <div class='container'>
+                <div class='param-line'>
+                    Position left: <input type='text' name='position-left'>px.
+                </div>
+                <div class='param-line'>
+                    Position top: <input type='text' name='position-top'>px.
+                </div>
+                <div class='param-line'>
+                    Rotate: <input type='text' name='rotate'>deg.
+                </div>
+                <div class='param-line'>
+                    Faces: 
+                    <select name='face-1'>
+                        <option value='0'>0</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                        <option value='6'>6</option>
+                    <select>
+                    <select name='face-2'>
+                        <option value='0'>0</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                        <option value='6'>6</option>
+                    <select>
+                    [<a href='#' data-rel='face-rand-btn'>random</a>]
+                </div>
+                <div class='param-line'>
+                    Size type: 
+                    <select name='size-type'>
+                        <option value='static'>Static size</option>
+                        <option value='bodyRatio'>Ratio by window width</option>
+                    <select>
+                </div>
+                <div class='param-line'>
+                    Width: <input type='text' name='size-width'>px.
+                </div>
+                <div class='param-line'>
+                    Height <input type='text' name='size-height'>px.
+                </div>
+                <div class='param-line' data-rel='size-ratio-body-width-line'>
+                    This domino size for screen width: <input type='text' name='size-ratio-body-width'>px.
+                </div>
+                <div class='param-line'>
+                    <input type='button' value='Update domino' data-rel='update-btn'>
+                </div>
             </div>
         </script>
         

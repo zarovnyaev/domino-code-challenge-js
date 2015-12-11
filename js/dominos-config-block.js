@@ -6,6 +6,8 @@ var DominosConfigBlock = function(params)
     this.obj = $('#dominos-config-block');
     this.containerObj = $('#dominos-config-block-container', this.obj);
     this.addNewDominoObj = $('#addNewDomino', this.obj);
+    
+    this.blocks = [];
 };
 
 /**
@@ -30,6 +32,16 @@ DominosConfigBlock.prototype.init = function()
 };
 
 /**
+ * Hide content of all blocks
+ */
+DominosConfigBlock.prototype.hideAllBlocksContent = function()
+{
+    for (var i in this.blocks) {
+        this.blocks[i].hideContent();
+    }
+};
+
+/**
  * Updates block view
  */
 DominosConfigBlock.prototype.updateBlockView = function()
@@ -43,7 +55,9 @@ DominosConfigBlock.prototype.updateBlockView = function()
 DominosConfigBlock.prototype.addDominoConfigBlock = function()
 {
     var newDominoConfigBlock = new DominoConfigBlock({
-        parentContainerObj: this.containerObj
+        parentContainerObj: this.containerObj,
+        configBlockPanel: this
     });
     newDominoConfigBlock.init();
+    this.blocks.push(newDominoConfigBlock);
 };

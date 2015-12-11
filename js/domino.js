@@ -8,6 +8,10 @@ var Domino = function(params)
 {
     params = params || {};
     
+    this.draggedObject = null;
+    
+    this.configBlock = params.configBlock || null;
+    
     // Elements classes
     this.dominoClass = params.dominoElementClass || 'domino';
     this.dominoFaceClass = 'domino-face';
@@ -101,6 +105,47 @@ Domino.prototype.init = function()
 };
 
 /**
+ * Set draggedObject element object for current domino
+ */
+Domino.prototype.setdraggedObject = function()
+{
+    var self = this;
+    this.mover = new DraggedObject({
+        'element': this.dominoObj,
+        'onDragStart': function() { self.onDominoDragStart(); },
+        'onDrag': function() { self.onDominoDrag(); },
+        'onDragStop': function() { self.onDominoDragStop(); }
+    });
+    this.mover.init();
+};
+
+/**
+ * When domino start draging
+ */
+Domino.prototype.onDominoDragStart = function()
+{
+    this.raise();
+    this.configBlock.showContent({'hideOther': true});
+};
+
+/**
+ * When domino stop draging
+ */
+Domino.prototype.onDominoDragStop = function()
+{
+    this.unraiseOther();
+};
+
+/**
+ * When domino draging
+ */
+Domino.prototype.onDominoDrag = function()
+{
+    this.configBlock.setPositionValues(this.mover.getPositionY(), this.mover.getPositionX());
+    this.position(this.mover.getPositionY(), this.mover.getPositionX());
+};
+
+/**
  * Generation of domino
  */
 Domino.prototype.genDomino = function()
@@ -113,10 +158,17 @@ Domino.prototype.genDomino = function()
     // Faces generate and insert
     this.dominoObj.append(this.genDominoFace(1));
     this.dominoObj.append(this.genDominoFace(2));
+    
+    // Set draggedObject
+    this.setdraggedObject();
+    
+    // Set new domino above of all
+    this.unraiseOther();
 };
 
 /**
  * Generation of domino face
+ * @param {Int} faceNumber
  */
 Domino.prototype.genDominoFace = function(faceNumber)
 {
@@ -179,22 +231,22 @@ Domino.prototype.setDominoFacePip = function(face, pip)
     this.removeFaceDots(face);
     
     for (var dot in this.pips[pip]) {
-        if (this.pips[pip][dot][0] === undefined || this.pips[pip][dot][1] === undefined) {
-            contunie;
+        if (this.pips[pip][dot][0] !== undefined 
+            && this.pips[pip][dot][1] !== undefined
+        ) {
+            var dotCell = this.getDominoFaceFrame(
+                face, 
+                this.pips[pip][dot][0], 
+                this.pips[pip][dot][1]
+            );
+            if (dotCell === null) {
+                continue;
+            }
+
+            $("<div/>", {
+                class: 'face-dot'
+            }).appendTo(dotCell);
         }
-        
-        var dotCell = this.getDominoFaceFrame(
-            face, 
-            this.pips[pip][dot][0], 
-            this.pips[pip][dot][1]
-        );
-        if (dotCell === null) {
-            continue;
-        }
-        
-        $("<div/>", {
-            class: 'face-dot'
-        }).appendTo(dotCell);
     }
     
     // Updating of dotted sizes
@@ -250,6 +302,7 @@ Domino.prototype.updateDotsSize = function()
 
 /**
  * Updating pip dottes sizes
+ * @param {Integer} size
  */
 Domino.prototype.setDotsSize = function(size)
 {
@@ -261,7 +314,7 @@ Domino.prototype.setDotsSize = function(size)
 /**
  * Returns domino face frame cell jQuery object or NULL if not exist
  * @param {Integer} face
- * @param {Integer} line
+ * @param {Integer} row
  * @param {Integer} cell
  * @returns {jQuery}|NULL
  */
@@ -343,6 +396,18 @@ Domino.prototype.raise = function()
     this.dominoObj
             .css('z-index', 1000)
             .css('box-shadow', '0 0 20px rgba(0, 0, 0, 0.5)');
+};
+
+/**
+ * Unraise other dominos
+ */
+Domino.prototype.unraiseOther = function()
+{
+    // Set all dominos not raised
+    this.unraiseAll();
+    
+    // Up current domino
+    this.dominoObj.css('z-index', 200);
 };
 
 /**

@@ -3,8 +3,10 @@ var DominoConfigBlock = function(params)
 {
     params = params || {};
     
+    this.configBlockPanel = params.configBlockPanel || null;
+    
     this.parentContainerObj = params.parentContainerObj || null;
-    this.obj = null;
+    this.obj = this.container = this.topLine = null;
     
     // Create domino
     this.domino = null;
@@ -21,6 +23,7 @@ DominoConfigBlock.prototype.init = function()
     }
     
     // Create domino
+    this.dominoParams.configBlock = this;
     this.domino = new Domino(this.dominoParams);
     this.domino.init();
     
@@ -37,10 +40,12 @@ DominoConfigBlock.prototype.init = function()
     // Sets domino raising when mouse over
     this.obj.hover(
         function() { self.domino.raise(); },
-        function() { self.domino.unraiseAll(); }
+        function() { self.domino.unraiseOther(); }
     );
     
     // Set panel objects
+    this.container = $('.container', this.obj);
+    this.topLine = $('.top-line', this.obj);
     this.deleteBtnObj = $('a[data-rel=delete-btn]', this.obj);
     this.updateBtnObj = $('input[data-rel=update-btn]', this.obj);
     // Inputs
@@ -92,6 +97,11 @@ DominoConfigBlock.prototype.init = function()
         event.stopPropagation();
     });
     
+    // Top line click
+    this.topLine.click(function() {
+        self.toggleContent();
+    });
+    
     // Set domino size type update listener
     this.inputSizeTypeObj.change(function(event)
     {
@@ -101,6 +111,7 @@ DominoConfigBlock.prototype.init = function()
 
 /**
  * Sets domino size type
+ * @param {String} type
  */
 DominoConfigBlock.prototype.setSizeType = function(type)
 {
@@ -150,6 +161,17 @@ DominoConfigBlock.prototype.updateDomino = function()
 };
 
 /**
+ * Set position values on config block
+ * @param {Int} top
+ * @param {Int} left
+ */
+DominoConfigBlock.prototype.setPositionValues = function(top, left)
+{
+    this.inputPositionTopObj.val(Math.floor(top));
+    this.inputPositionLeftObj.val(Math.floor(left));
+};
+
+/**
  * Delete this block with domino
  */
 DominoConfigBlock.prototype.deleteBlock = function()
@@ -161,4 +183,36 @@ DominoConfigBlock.prototype.deleteBlock = function()
     // Delete block
     this.obj.remove();
     delete this;
+};
+
+/**
+ * Hide content block
+ */
+DominoConfigBlock.prototype.hideContent = function()
+{
+    this.container.hide();
+};
+
+/**
+ * Show content block
+ * @param {Object} params
+ */
+DominoConfigBlock.prototype.showContent = function(params)
+{
+    params = params || {};
+    
+    // If hide other blocks content
+    if (params.hideOther !== undefined && params.hideOther === true) {
+        this.configBlockPanel.hideAllBlocksContent();
+    }
+    
+    this.container.show();
+};
+
+/**
+ * Toggle content block
+ */
+DominoConfigBlock.prototype.toggleContent = function()
+{
+    this.container.toggle();
 };
