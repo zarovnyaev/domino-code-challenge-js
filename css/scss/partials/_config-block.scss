@@ -1,0 +1,51 @@
+
+$add-new-domino-btn-bgcolor: #f00;
+$add-new-domino-btn-textcolor: #fff;
+$config-block-content-bgcolor: #eaeaea;
+
+$config-block-top-bgcolor: darken($config-block-content-bgcolor, 30%);
+$config-block-top-textcolor: $config-block-content-bgcolor;
+$config-block-content-textcolor: darken($config-block-content-bgcolor, 90%);
+
+#dominos-config-block {
+    float: right;
+    width: 300px;
+    
+    #dominos-config-block-container {
+        overflow-y: auto;
+    }
+    
+    #addNewDomino {
+        display: block;
+        background: $add-new-domino-btn-bgcolor;
+        color: $add-new-domino-btn-textcolor;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
+.domino-config-block {
+    background-color: $config-block-content-bgcolor;
+    color: $config-block-content-textcolor;
+    
+    .top-line {
+        background-color: $config-block-top-bgcolor; 
+        padding: 5px;
+        color: $config-block-top-textcolor;
+        border-top: 1px solid $config-block-content-bgcolor;
+    }
+    
+    .params-group-top {
+        font-weight: bold;
+        padding: 5px;
+    }
+    
+    .param-line {
+        padding: 5px;
+    
+        input[type=text] {
+            width: 100px;
+        }
+    }
+}
