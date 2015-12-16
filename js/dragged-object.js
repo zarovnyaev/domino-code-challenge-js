@@ -38,8 +38,8 @@ DraggedObject.prototype.init = function()
 DraggedObject.prototype.onDraggingStart = function()
 {
     // Set element position
-    this.elementPositionX = this.element.position().left;
-    this.elementPositionY = this.element.position().top;
+    this.elementPositionX = this.element.offset().left;
+    this.elementPositionY = this.element.offset().top;
 
     // Set on element cursor positions
     this.onElementCursorPositionX = DocumentMouse.getX() 
