@@ -27,7 +27,7 @@ DominoConfigBlock.prototype.init = function()
     this.domino = new Domino(this.dominoParams);
     this.domino.init();
     
-    var self = this;
+    var _dominoConfigBlockObj = this;
     
     // Create and insert block
     this.obj = $("<div/>", {
@@ -39,8 +39,8 @@ DominoConfigBlock.prototype.init = function()
     
     // Sets domino raising when mouse over
     this.obj.hover(
-        function() { self.domino.raise(); },
-        function() { self.domino.unraiseOther(); }
+        function() { _dominoConfigBlockObj.domino.raise(); },
+        function() { _dominoConfigBlockObj.domino.unraiseOther(); }
     );
     
     // Set panel objects
@@ -76,7 +76,7 @@ DominoConfigBlock.prototype.init = function()
     // Set delete listener
     this.deleteBtnObj.click(function(event)
     {
-        self.deleteBlock();
+        _dominoConfigBlockObj.deleteBlock();
         event.preventDefault();
         event.stopPropagation();
     });
@@ -84,7 +84,7 @@ DominoConfigBlock.prototype.init = function()
     // Set domino update listener
     this.updateBtnObj.click(function(event)
     {
-        self.updateDomino();
+        _dominoConfigBlockObj.updateDomino();
         event.preventDefault();
         event.stopPropagation();
     });
@@ -92,20 +92,17 @@ DominoConfigBlock.prototype.init = function()
     // Face rand click
     this.faceRandObj.click(function(event)
     {
-        self.setRandomDominoFaces();
+        _dominoConfigBlockObj.setRandomDominoFaces();
         event.preventDefault();
         event.stopPropagation();
     });
     
     // Top line click
-    this.topLine.click(function() {
-        self.toggleContent();
-    });
+    this.topLine.click(this.toggleContent.bind(this));
     
     // Set domino size type update listener
-    this.inputSizeTypeObj.change(function(event)
-    {
-        self.setSizeType();
+    this.inputSizeTypeObj.change(function() {
+        _dominoConfigBlockObj.setSizeType();
     });
 };
 

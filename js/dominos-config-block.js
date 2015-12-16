@@ -15,20 +15,12 @@ var DominosConfigBlock = function(params)
  */
 DominosConfigBlock.prototype.init = function()
 {
-    var self = this;
-    
     // When "Add new domino" link was clicked
-    this.addNewDominoObj.click(function()
-    {
-        self.addDominoConfigBlock();
-    });
+    this.addNewDominoObj.click(this.addDominoConfigBlock.bind(this));
     
     // Udate block view
     this.updateBlockView();
-    $(window).resize(function()
-    {
-        self.updateBlockView();
-    });
+    $(window).resize(this.updateBlockView.bind(this));
 };
 
 /**

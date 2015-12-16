@@ -74,11 +74,7 @@ Domino.prototype.setSize = function(sizeParams)
     
     // If sets domino dynamic size
     if (this.dominoSizeCalcType === 'bodyRatio') {
-        var self = this;
-        $(window).resize(function()
-        {
-            self.updateDominoSize();
-        });
+        $(window).resize(this.updateDominoSize.bind(this));
     }
     
     return this;

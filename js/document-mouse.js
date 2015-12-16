@@ -30,12 +30,12 @@ var DocumentMouse = {
     
     init: function()
     {
-        var self = this;
+        var _documentMouseObj = this;
         $(document).on("mousemove", function(event) {
-            self.x = event.pageX;
-            self.y = event.pageY;
-            if (typeof self.onMove === "function") {
-                self.onMove();
+            _documentMouseObj.x = event.pageX;
+            _documentMouseObj.y = event.pageY;
+            if (typeof _documentMouseObj.onMove === "function") {
+                _documentMouseObj.onMove();
             }
         });
     }

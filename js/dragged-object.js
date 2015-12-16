@@ -25,17 +25,11 @@ DraggedObject.prototype.init = function()
     // Sets cursor
     this.element.css('cursor', 'move');
     
-    var self = this;
-    
     // Set start
-    this.element.mousedown(function() {
-        self.onDraggingStart();
-    });
+    this.element.mousedown(this.onDraggingStart.bind(this));
     
     // Set end
-    this.element.mouseup(function() {
-        self.onDraggingStop();
-    });
+    this.element.mouseup(this.onDraggingStop.bind(this));
 };
 
 /**
@@ -43,8 +37,6 @@ DraggedObject.prototype.init = function()
  */
 DraggedObject.prototype.onDraggingStart = function()
 {
-    var self = this;
-    
     // Set element position
     this.elementPositionX = this.element.position().left;
     this.elementPositionY = this.element.position().top;
@@ -55,9 +47,7 @@ DraggedObject.prototype.onDraggingStart = function()
     this.onElementCursorPositionY = DocumentMouse.getY() 
                                   - this.elementPositionY;
 
-    DocumentMouse.setMoveListenner(function() {
-        self.elementPositionUpdate();
-    });
+    DocumentMouse.setMoveListenner(this.elementPositionUpdate.bind(this));
     
     // Execute onDragStart function is specified
     if (typeof this.onDragStart === 'function') {
