@@ -105,12 +105,11 @@ Domino.prototype.init = function()
  */
 Domino.prototype.setdraggedObject = function()
 {
-    var self = this;
     this.mover = new DraggedObject({
         'element': this.dominoObj,
-        'onDragStart': function() { self.onDominoDragStart(); },
-        'onDrag': function() { self.onDominoDrag(); },
-        'onDragStop': function() { self.onDominoDragStop(); }
+        'onDragStart': this.onDominoDragStart.bind(this),
+        'onDrag': this.onDominoDrag.bind(this),
+        'onDragStop': this.onDominoDragStop.bind(this)
     });
     this.mover.init();
 };
